@@ -1,0 +1,16 @@
+<html>
+    <body>
+        <h1>hogehoge</h1>
+
+        <script>
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", "/api/getName");
+            xhr.addEventListener("load", function(e) {
+                var nameList = JSON.parse(xhr.responseText);
+                console.log(nameList);
+            });
+            xhr.send();
+            </script>
+    </body>
+</html>

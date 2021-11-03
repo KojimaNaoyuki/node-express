@@ -7,6 +7,16 @@ const server = app.listen(3000, function(){
     console.log("Node.js is listening to PORT:" + server.address().port);
 });
 
+// View EngineにEJSを指定。
+app.set('view engine', 'ejs');
+
+// "/"へのGETリクエストでindex.ejsを表示する。拡張子（.ejs）は省略されていることに注意。
+app.get("/", function(req, res, next){
+    res.render("index", {}); //renderメソッドの第一引数に表示するejsファイルを指定する 第二引数にはそれに渡すオブジェクト
+});
+
+//------------------------------- API処理 -------------------------------//
+
 //送信するAPI情報を用意
 const nameList = [
     {
@@ -24,13 +34,13 @@ const nameList = [
 ]
 
 //固定のapi
-app.get("/getName", function(req, res, next) {
+app.get("/api/getName", function(req, res, next) {
     //getNameにアクセスされたら実行される
     res.json(nameList); //引数resのjsonメソッドを使用することでフロント側に渡せる
 });
 
 //動的なapi
-app.get("/getName/:nameId", function(req, res, next) {
+app.get("/api/getName/:nameId", function(req, res, next) {
     let resultName = 'No member';
 
     //総当たりで検索　効率悪いけど
